@@ -1,0 +1,1 @@
+#file này để trống để Python nhận diện thư mục routes như một package

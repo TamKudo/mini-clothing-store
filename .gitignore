@@ -1,0 +1,16 @@
+# Bỏ qua thư mục ảo Python
+venv/
+env/
+.env
+
+# Bỏ qua file cache chạy code
+__pycache__/
+*.pyc
+
+# Bỏ qua database SQLite (nếu có dùng)
+*.sqlite3
+*.db
+
+# Bỏ qua file cấu hình hệ thống
+.DS_Store
+.vscode/

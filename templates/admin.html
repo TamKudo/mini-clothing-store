@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="admin-body">
+
+    <header class="admin-header">
+        <div class="header-left">
+            <a class="admin-logo"><i class="fas fa-user-shield"></i> ADMIN DASHBOARD</a>
+        </div>
+        <div class="header-right">
+            <span>Xin chào, <strong>Admin</strong></span>
+            <a href="/" class="nav-btn btn-home"><i class="fas fa-home"></i> Trang chủ</a>
+            <a href="/logout" class="nav-btn btn-logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+        </div>
+    </header>
+
+    <div class="admin-container">
+
+        <div class="section-header">
+            <h2><i class="fas fa-box-open"></i> Quản lý sản phẩm</h2>
+            <button class="btn-add-new" onclick="openModal()">
+                <i class="fas fa-plus"></i> Thêm sản phẩm
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="admin-table" id="productTable">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">ID</th>
+                        <th style="width: 120px;">Hình ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá (VNĐ)</th>
+                        <th style="width: 150px;">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <br><br>
+
+        <div class="section-header">
+            <h2><i class="fas fa-shopping-cart"></i> Quản lý đơn hàng</h2>
+        </div>
+        <div class="table-wrapper">
+            <table class="admin-table" id="orderTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Khách hàng</th>
+                        <th>Tổng tiền</th>
+                        <th>Ngày tạo</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Thêm sản phẩm mới</h3>
+                <span class="close-btn" onclick="closeModal()">×</span>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="productId">
+                <div class="form-group">
+                    <label>Tên sản phẩm <span class="text-red">*</span></label>
+                    <input type="text" id="name" placeholder="Ví dụ: Áo thun nam...">
+                </div>
+
+                <div class="form-group">
+                    <label>Giá tiền (VNĐ) <span class="text-red">*</span></label>
+                    <input type="number" id="price" placeholder="Ví dụ: 100000">
+                </div>
+
+                <div class="form-group">
+                    <label>URL Hình ảnh</label>
+                    <input type="text" id="image" placeholder="/static/image/..." oninput="previewImage()">
+                    <div class="img-preview-box">
+                        <img id="preview-img" src="" style="display:none;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Mô tả</label>
+                    <textarea id="description" rows="3" placeholder="Nhập mô tả sản phẩm..."></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">Hủy bỏ</button>
+                <button class="btn-save" onclick="saveProduct()">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/admin.js"></script>
+</body>
+
+</html>
