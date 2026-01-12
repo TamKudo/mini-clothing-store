@@ -1,10 +1,9 @@
 // static/js/cart.js
 const API_BASE = 'http://localhost:5000';
 
-// Biến lưu giỏ hàng
 let cart = [];
 
-// 1. Hàm tải giỏ hàng (Chỉ tải từ DB nếu đã đăng nhập)
+// 1. Hàm tải giỏ hàng
 export async function loadCart() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -14,7 +13,7 @@ export async function loadCart() {
             const res = await fetch(`${API_BASE}/api/cart?user_id=${currentUser.id}`);
             const data = await res.json();
 
-            // Kiểm tra kỹ dữ liệu trả về để tránh lỗi .map
+            // Kiểm tra kỹ dữ liệu trả về 
             if (Array.isArray(data)) {
                 cart = data;
             } else {
@@ -28,8 +27,6 @@ export async function loadCart() {
     } else {
         // Nếu chưa đăng nhập -> Giỏ hàng rỗng         
     }
-
-    // Vẽ giỏ hàng ra màn hình
     renderCart();
 }
 
@@ -41,7 +38,7 @@ export async function addToCart(product, quantity = 1) {
     if (!currentUser || !currentUser.id) {
         alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ!");
         // Mở modal đăng nhập (nếu hàm openAuthModal có sẵn global)
-        if (window.openAuthModal) window.openAuthModal(); // Hoặc document.getElementById('userIcon').click();
+        if (window.openAuthModal) window.openAuthModal();
         return;
     }
 
@@ -104,7 +101,7 @@ window.updateQty = async function (itemId, newQty) {
     }
 }
 
-// 5. Render HTML (Giữ nguyên)
+// 5. Render HTML
 function renderCart() {
     const cartItemsContainer = document.getElementById('cartItems');
     const cartEmpty = document.getElementById('cartEmpty');
@@ -171,7 +168,7 @@ export async function checkout() {
         return;
     }
 
-    // Kiểm tra giỏ hàng có đồ không (biến cart toàn cục)
+    // Kiểm tra giỏ hàng có đồ không
     if (cart.length === 0) {
         alert("Giỏ hàng trống!");
         return;
@@ -194,8 +191,8 @@ export async function checkout() {
         const data = await response.json();
 
         if (data.success) {
-            alert("🎉 Đặt hàng thành công! Cảm ơn bạn đã mua sắm.");
-            loadCart(); // Tải lại giỏ (lúc này sẽ rỗng)
+            alert(" Đặt hàng thành công! Cảm ơn bạn đã mua sắm.");
+            loadCart(); // Tải lại giỏ
             closeCartModal();
         } else {
             alert("Lỗi: " + data.message);

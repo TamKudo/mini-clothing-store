@@ -116,7 +116,6 @@ export async function handleRegister(e) {
 export function confirmLogout() {
     localStorage.removeItem('currentUser');
     closeLogoutModal();
-    // Simple alert replacement or reuse toast logic
     alert('Đã đăng xuất thành công!');
     location.reload();
 }
@@ -181,9 +180,9 @@ export function checkLoginForm() {
 
     // Nếu cả 2 ô đều không rỗng
     if (email.trim() !== "" && password.trim() !== "") {
-        loginBtn.classList.add('active'); // Thêm class active (nút chuyển màu đen)
+        loginBtn.classList.add('active');
     } else {
-        loginBtn.classList.remove('active'); // Xóa class active (nút về màu xám)
+        loginBtn.classList.remove('active');
     }
 }
 
@@ -202,6 +201,6 @@ export function checkRegisterForm() {
     }
 }
 
-// Gán vào window để HTML có thể gọi được (quan trọng)
+// Gán vào window để HTML có thể gọi được 
 window.checkLoginForm = checkLoginForm;
 window.checkRegisterForm = checkRegisterForm;

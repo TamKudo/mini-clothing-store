@@ -26,7 +26,7 @@ app.register_blueprint(admin_bp)
 def home():
     return send_from_directory('templates', 'index.html')
 
-# Route serve static files (cho chắc chắn)
+# Route serve static files 
 @app.route('/<path:path>')
 def send_static(path):
     return send_from_directory('static', path)

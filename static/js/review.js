@@ -85,11 +85,10 @@ function generateStars(rating) {
     return stars;
 }
 
-// 4. QUAN TRỌNG: Kiểm tra đăng nhập để ẨN/HIỆN FORM (Chứ không ẩn danh sách)
 function checkLoginStatus() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    const formBox = document.getElementById('reviewFormContainer'); // Cái khung nhập liệu
-    const warning = document.getElementById('loginWarning');       // Dòng chữ "Vui lòng đăng nhập..."
+    const formBox = document.getElementById('reviewFormContainer');
+    const warning = document.getElementById('loginWarning');
 
     if (currentUser && currentUser.id) {
         // Đã đăng nhập: Hiện form nhập, Ẩn cảnh báo
@@ -101,12 +100,87 @@ function checkLoginStatus() {
         if (warning) warning.style.display = 'block';
     }
 }
-
-// Gán hàm vào window
 window.submitReview = submitReview;
 
-// Chạy khi tải trang
 document.addEventListener('DOMContentLoaded', () => {
-    loadReviews();      // Luôn tải danh sách review (bất kể ai)
-    checkLoginStatus(); // Chỉ kiểm tra để ẩn/hiện cái form nhập liệu
+    loadReviews();
+    checkLoginStatus();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const stars = document.querySelectorAll(".star-item");
+    const ratingText = document.getElementById("ratingText");
+    const hiddenInput = document.getElementById("reviewRating");
+    const starsContainer = document.querySelector(".stars-input");
+
+    const textMap = {
+        1: "Rất tệ",
+        2: "Tệ",
+        3: "Bình thường",
+        4: "Tốt",
+        5: "Tuyệt vời"
+    };
+
+    function highlightStars(value) {
+        stars.forEach(s => {
+            const starVal = parseInt(s.getAttribute("data-value"));
+            if (starVal <= value) {
+                s.classList.remove("bx-star");
+                s.classList.add("bxs-star");
+                s.classList.add("active");
+            } else {
+                s.classList.remove("bxs-star");
+                s.classList.remove("active");
+                s.classList.add("bx-star");
+            }
+        });
+        if (value > 0) {
+            ratingText.textContent = textMap[value];
+        }
+    }
+
+    stars.forEach(star => {
+        star.addEventListener("mouseenter", () => {
+            const value = parseInt(star.getAttribute("data-value"));
+            highlightStars(value);
+        });
+
+        star.addEventListener("click", () => {
+            const value = parseInt(star.getAttribute("data-value"));
+            hiddenInput.value = value;
+            highlightStars(value);
+        });
+    });
+
+    starsContainer.addEventListener("mouseleave", () => {
+        const currentValue = parseInt(hiddenInput.value);
+        highlightStars(currentValue);
+    });
+});
+
+window.addTag = function (element) {
+    const textarea = document.getElementById("reviewContent");
+    const textToAdd = element.innerText;
+    if (element.classList.contains('selected')) {
+        return;
+    }
+
+    // Hiệu ứng Visual: Đánh dấu thẻ đã chọn
+    element.classList.add('selected');
+
+    // Logic nối chuỗi thông minh
+    let currentText = textarea.value.trim();
+
+    if (currentText.length > 0) {
+        const lastChar = currentText.slice(-1);
+        if (!['.', ',', '!', ';'].includes(lastChar)) {
+            textarea.value += ". " + textToAdd;
+        } else {
+            textarea.value += " " + textToAdd;
+        }
+    } else {
+        textarea.value = textToAdd;
+    }
+
+    textarea.focus();
+};

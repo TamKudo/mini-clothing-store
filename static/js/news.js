@@ -13,8 +13,6 @@ async function loadNews() {
             container.innerHTML = '<p>Chưa có tin tức nào.</p>';
             return;
         }
-
-        // Render HTML với nút bấm và khung chứa nội dung ẩn
         container.innerHTML = newsList.map((item, index) => `
             <div class="cart" id="news-item-${index}">
                 <img src="${item.image}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/300'">

@@ -243,16 +243,33 @@
             <div id="reviewFormContainer" class="review-form-box">
                 <h3>Viết đánh giá của bạn</h3>
                 <form onsubmit="submitReview(event)">
-                    <textarea id="reviewContent" placeholder="Chia sẻ cảm nghĩ của bạn..." required></textarea>
-                    <div class="form-actions">
-                        <select id="reviewRating" aria-label="Chọn mức độ đánh giá">
-                            <option value="5">5 Sao (Tuyệt vời)</option>
-                            <option value="4">4 Sao (Tốt)</option>
-                            <option value="3">3 Sao (Bình thường)</option>
-                            <option value="2">2 Sao (Tệ)</option>
-                            <option value="1">1 Sao (Rất tệ)</option>
-                        </select>
-                        <button type="submit" class="create-account-btn">Gửi</button>
+                    <div class="textarea-wrapper">
+                        <textarea id="reviewContent" placeholder="Chia sẻ cảm nghĩ của bạn..." required></textarea>
+
+                        <div class="quick-tags">
+                            <span class="tag-item" onclick="addTag(this)">Chất lượng sản phẩm tuyệt vời</span>
+                            <span class="tag-item" onclick="addTag(this)">Đóng gói sản phẩm rất đẹp</span>
+                            <span class="tag-item" onclick="addTag(this)">Shop phục vụ rất tốt</span>
+                            <span class="tag-item" onclick="addTag(this)">Rất đáng tiền</span>
+                            <span class="tag-item" onclick="addTag(this)">Giao hàng nhanh</span>
+                            <span class="tag-item" onclick="addTag(this)">Đúng mô tả</span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions-modern">
+                        <div class="rating-group">
+                            <div class="stars-input">
+                                <i class='bx bxs-star star-item active' data-value="1"></i>
+                                <i class='bx bxs-star star-item active' data-value="2"></i>
+                                <i class='bx bxs-star star-item active' data-value="3"></i>
+                                <i class='bx bxs-star star-item active' data-value="4"></i>
+                                <i class='bx bxs-star star-item active' data-value="5"></i>
+                            </div>
+                            <span id="ratingText" class="rating-text">Tuyệt vời</span>
+                            <input type="hidden" id="reviewRating" value="5">
+                        </div>
+
+                        <button type="submit" class="submit-red-btn">Gửi đánh giá</button>
                     </div>
                 </form>
             </div>

@@ -36,10 +36,6 @@ def add_review():
         user_id = data.get('user_id')    # Lấy ID người dùng
         comments = data.get('comments')  # Lấy nội dung comment
         rating = data.get('rating', 5)
-        
-        # product_id tạm để NULL nếu là review chung cho trang web
-        # Nếu muốn review sản phẩm cụ thể thì truyền ID sản phẩm vào
-
         if not user_id or not comments:
             return jsonify({"success": False, "message": "Thiếu thông tin!"})
 

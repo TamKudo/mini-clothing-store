@@ -3,7 +3,7 @@ from db import get_db_connection
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
 
-# --- LOGIN TEST (Để cấp quyền Admin nhanh) ---
+# --- LOGIN TEST ---
 @admin_bp.route("/login-test")
 def login_test():
     session['role'] = 'admin'
@@ -15,9 +15,7 @@ def login_test():
 def index():
     return render_template("admin.html")
 
-# =======================================================
 # QUẢN LÝ SẢN PHẨM (PRODUCTS)
-# =======================================================
 
 # 1. LẤY DANH SÁCH SẢN PHẨM
 @admin_bp.route("/products", methods=["GET"])
@@ -90,9 +88,7 @@ def delete_product(product_id):
         cursor.close()
         conn.close()
 
-# =======================================================
 # QUẢN LÝ ĐƠN HÀNG (ORDERS)
-# ===========================================]
 @admin_bp.route("/orders", methods=["GET"])
 def get_orders():
     try:

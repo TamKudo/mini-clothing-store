@@ -1555,19 +1555,14 @@ header.sticky {
 }
 
 /* 1. Đổ bóng cho SẢN PHẨM khi di chuột vào */
-/* Code cũ của bạn đang dùng scale(0.9), mình kết hợp thêm bóng */
 .row img {
     border-radius: 8px;
-    /* Bo góc nhẹ cho ảnh sản phẩm */
     transition: all 0.4s ease;
 }
 
 .row:hover img {
-    /* Bóng đổ mềm mại màu đen nhạt */
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    /* Đẩy ảnh lên trên 5px tạo cảm giác nổi */
     transform: translateY(-5px) scale(1.02);
-    /* Lưu ý: Mình đổi scale thành 1.02 để phóng to nhẹ thay vì thu nhỏ (0.9) nhìn sẽ đẹp hơn */
 }
 
 
@@ -1575,17 +1570,13 @@ header.sticky {
 .update-cart .cart {
     border-radius: 10px;
     padding: 15px;
-    /* Thêm khoảng cách để bóng không bị sát nội dung */
     transition: all 0.3s ease;
     background: #fff;
-    /* Đảm bảo nền trắng để bóng hiển thị rõ */
 }
 
 .update-cart .cart:hover {
-    /* Đổ bóng xung quanh khung tin tức */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transform: translateY(-5px);
-    /* Nổi lên nhẹ */
 }
 
 
@@ -1594,7 +1585,6 @@ header.sticky {
 .add-to-cart-btn:hover,
 .create-account-btn:hover {
     box-shadow: 0 8px 15px rgba(238, 28, 71, 0.3);
-    /* Bóng màu đỏ nhạt theo tông màu web */
     transform: translateY(-2px);
 }
 
@@ -1602,5 +1592,115 @@ header.sticky {
 /* 4. Đổ bóng cho Header khi cuộn (Làm rõ hơn code cũ) */
 header.sticky {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
-    /* Bóng đậm hơn chút cho rõ */
+}
+
+/* --- Bố cục thanh hành động bên dưới --- */
+.form-actions-modern {
+    display: flex;
+    justify-content: space-between;
+    /* Sao bên trái, Nút bên phải */
+    align-items: center;
+    margin-top: 15px;
+}
+
+/* --- 1. Style cho Ngôi sao --- */
+.rating-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stars-input {
+    display: flex;
+    gap: 5px;
+}
+
+.stars-input i {
+    font-size: 24px;
+    color: #ddd;
+    /* Màu xám mặc định */
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+/* Màu vàng khi được chọn */
+.stars-input i.active {
+    color: #ffc107;
+}
+
+.stars-input i:hover {
+    transform: scale(1.1);
+    /* Phóng to nhẹ khi di chuột */
+}
+
+.rating-text {
+    font-size: 14px;
+    color: #ffc107;
+    font-weight: 500;
+}
+
+/* --- 2. Style cho Nút Gửi (Màu đỏ) --- */
+.submit-red-btn {
+    background-color: #EE1C47;
+    /* Màu đỏ chủ đạo */
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-red-btn:hover {
+    background-color: #d11a3f;
+    box-shadow: 0 4px 10px rgba(238, 28, 71, 0.3);
+}
+
+@media (max-width: 500px) {
+    .form-actions-modern {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .submit-red-btn {
+        width: 100%;
+    }
+}
+
+/* --- Quick Tags (Gợi ý đánh giá) --- */
+.quick-tags {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.tag-item {
+    font-size: 13px;
+    padding: 6px 12px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.tag-item:hover {
+    border-color: #EE1C47;
+    color: #EE1C47;
+    background-color: #fff5f7;
+}
+
+/* Trạng thái khi đã chọn */
+.tag-item.selected {
+    background-color: #fff0f3;
+    /* Nền hồng nhạt */
+    border-color: #EE1C47;
+    color: #EE1C47;
+    font-weight: 500;
 }

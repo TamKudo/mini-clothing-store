@@ -2,9 +2,6 @@
 import { fetchProductsApi } from './api.js';
 import { openProductDetail } from './productDetail.js';
 
-// Expose openProductDetail globally because generated HTML string calls it
-// Note: Since we pass objects in HTML string onclick, it's tricky. 
-// We will assign it to window so the string `onclick="openProductDetail(...)"` works.
 window.openProductDetail = openProductDetail;
 
 let allProductsFromDB = [];
@@ -40,7 +37,6 @@ function renderProductHTML(product) {
 function renderProductHTMLSimple(product) {
     const safeName = product.name.replace(/'/g, "\\'");
 
-    // SỬA: Xóa chữ 'static/' ở chỗ image
     const objStr = `{id:${product.id}, name:'${safeName}', price:'${product.price}', image:'${product.image}', tag:'${product.tag}', rating:${product.rating}, colors:${product.colors}, description:'${product.description}'}`;
     return `
         <div class="row" onclick="window.openProductDetail(${objStr})">
@@ -66,7 +62,6 @@ export async function initProducts() {
             return;
         }
         allProductsFromDB = data;
-        //displayTrendingProducts();
         showProducts('all');
     } catch (error) {
         console.error("Connection error", error);

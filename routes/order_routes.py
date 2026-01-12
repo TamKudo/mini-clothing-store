@@ -24,7 +24,7 @@ def checkout():
              return jsonify({"success": False, "message": "Không tìm thấy giỏ hàng!"})
         cart_id = cart_row['cart_id']
 
-        # 2. Lấy tất cả sản phẩm trong giỏ hàng (Kèm giá tiền hiện tại)
+        # 2. Lấy tất cả sản phẩm trong giỏ hàng
         sql_get_items = """
             SELECT ci.product_id, ci.quantity, ci.color, ci.size, p.price 
             FROM cart_items ci
@@ -40,7 +40,7 @@ def checkout():
         # 3. Tính tổng tiền
         total_amount = sum(item['price'] * item['quantity'] for item in items)
 
-        # 4. Tạo Đơn hàng (Insert vào bảng ORDERS)
+        # 4. Tạo Đơn hàng
         sql_order = """
             INSERT INTO orders (user_id, shipping_address, total_amount, status, order_date) 
             VALUES (%s, %s, %s, 'Pending', NOW())
@@ -48,7 +48,7 @@ def checkout():
         cursor.execute(sql_order, (user_id, address, total_amount))
         order_id = cursor.lastrowid # Lấy ID của đơn hàng vừa tạo
 
-        # 5. Lưu chi tiết đơn hàng (Insert vào bảng ORDER_DETAILS)
+        # 5. Lưu chi tiết đơn hàng vào bảng ORDER_DETAILS
         sql_detail = """
             INSERT INTO order_details (order_id, product_id, color, size, quantity, price)
             VALUES (%s, %s, %s, %s, %s, %s)
@@ -63,7 +63,7 @@ def checkout():
                 item['price'] # Lưu giá tại thời điểm mua
             ))
 
-        # 6. Xóa sạch giỏ hàng (Vì đã mua xong)
+        # 6. Xóa sạch giỏ hàng 
         cursor.execute("DELETE FROM cart_items WHERE cart_id = %s", (cart_id,))
 
         conn.commit() # Lưu tất cả thay đổi

@@ -79,7 +79,6 @@ function renderOrderTable(orders) {
 
 // --- XỬ LÝ MODAL (POPUP) ---
 
-// Hàm xem trước ảnh khi nhập link
 function previewImage() {
     const url = document.getElementById("image").value;
     const img = document.getElementById("preview-img");

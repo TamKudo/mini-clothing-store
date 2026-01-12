@@ -15,7 +15,7 @@ def get_news():
         cursor.execute(sql)
         news_list = cursor.fetchall()
         
-        # Format lại ngày tháng cho đẹp
+        # Format lại ngày tháng
         for item in news_list:
             # Chuyển object datetime thành chuỗi
             item['date_formatted'] = item['created_at'].strftime("%d %b %Y")
