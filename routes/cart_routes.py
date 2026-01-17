@@ -1,4 +1,3 @@
-# routes/cart_routes.py
 from flask import Blueprint, jsonify, request
 from db import get_db_connection
 
@@ -40,7 +39,8 @@ def get_cart_items():
         
         # JOIN bảng cart_items với products để lấy tên và ảnh
         sql = """
-            SELECT ci.cart_item_id, ci.quantity, p.product_id, p.product_name, p.price, p.image 
+            SELECT ci.cart_item_id, ci.quantity, p.product_id, p.product_name,
+            p.price, p.image 
             FROM cart_items ci
             JOIN products p ON ci.product_id = p.product_id
             WHERE ci.cart_id = %s

@@ -3,13 +3,6 @@ from db import get_db_connection
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
 
-# --- LOGIN TEST ---
-@admin_bp.route("/login-test")
-def login_test():
-    session['role'] = 'admin'
-    session['user_id'] = 1
-    return "<h1>Đã login Admin!</h1><a href='/admin/'>Về Dashboard</a>"
-
 # --- TRANG DASHBOARD ---
 @admin_bp.route("/")
 def index():

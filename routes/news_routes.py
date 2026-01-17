@@ -1,4 +1,3 @@
-# routes/news_routes.py
 from flask import Blueprint, jsonify
 from db import get_db_connection
 
